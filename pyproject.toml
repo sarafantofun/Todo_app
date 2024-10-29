@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "stepic3"
+name = "Todo_app"
 version = "0.1.0"
 description = ""
 authors = ["Татьяна Сарафанова <sara4ka0@yandex.ru>"]
