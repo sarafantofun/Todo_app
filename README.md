@@ -82,9 +82,11 @@ To create a new user, send a `POST` request to `/api/users/create_user` with the
 {
   "username": "your_username",
   "password": "your_password",
-  "role": "admin"  // or "user" or "guest"
+  "role": "admin"
 }
 ```
+
+Note: Allowed values for role are "admin", "user", or "guest".
 
 ## Get Access Token
 
