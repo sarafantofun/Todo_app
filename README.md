@@ -55,7 +55,7 @@ The `Todo_app` project is an API for task management (todo) with user authentica
     POSTGRES_PORT=5432
     ```
 
-5**Generate and set a Unique `SECRET_KEY` for JWT Authentication**:
+5. **Generate and set SECRET_KEY** for JWT Authentication:
    - Open a terminal and run the following Python command to generate a random 256-bit hexadecimal key:
      ```bash
      python -c "import secrets; print(secrets.token_hex(32))"
@@ -67,12 +67,12 @@ The `Todo_app` project is an API for task management (todo) with user authentica
      ```
      Replace `your_generated_secret_key` with the key you copied from the previous step.
 
-6**Ensure PostgreSQL is running. Run the following command to apply Alembic migrations**:
+6. **Ensure PostgreSQL is running. Run the following command to apply Alembic migrations**:
     ```bash
     poetry run alembic upgrade head
     ```
 
-7**Run the application**:
+7. **Run the application**:
     ```bash
     poetry run uvicorn main:app --reload
     ```
