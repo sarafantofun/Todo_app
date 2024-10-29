@@ -134,9 +134,10 @@ If the credentials are correct, you will receive a JSON response containing the 
 - **app/api/endpoints**: Controllers for handling requests.
   - `todo.py`: Endpoints for task management.
   - `auth.py`: Endpoints for authentication.
+  - `users.py`: Endpoints for user management, including creating new users with hashed passwords and specifying user roles.
 - **app/api/db**: Database models and configuration.
 - **app/api/schemas**: Data validation schemas.
-- **app/settings.py**: Configuration settings for database connections using `pydantic-settings`.
+- **app/api/db/settings_db.py**: Configuration settings for database connections using `pydantic-settings`.
 
 ## Environment Variables
 
