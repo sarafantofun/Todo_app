@@ -28,7 +28,7 @@ The `Todo_app` project is an API for task management (todo) with user authentica
 - **JWT** for authentication
 - **pydantic-settings** for managing environment variables
 
-## Installation and Setup
+## Installation, Setup and Database Migration
 
 1. **Clone the repository**:
     ```bash
@@ -55,17 +55,26 @@ The `Todo_app` project is an API for task management (todo) with user authentica
     POSTGRES_PORT=5432
     ```
 
-5. **Run the application**:
-    ```bash
-    poetry run uvicorn main:app --reload
-    ```
+5**Generate and set a Unique `SECRET_KEY` for JWT Authentication**:
+   - Open a terminal and run the following Python command to generate a random 256-bit hexadecimal key:
+     ```bash
+     python -c "import secrets; print(secrets.token_hex(32))"
+     ```
+   - Copy the output. This will look something like `d759d4f8dd25fe2c50453e71e5e4ad1c4304973bd194667214aba37645816181`.
+   - Add a line in the `.env` file to set your `SECRET_KEY`:
+     ```dotenv
+     SECRET_KEY=your_generated_secret_key
+     ```
+     Replace `your_generated_secret_key` with the key you copied from the previous step.
 
-## Database Migration
-
-1. Ensure PostgreSQL is running.
-2. Run the following command to apply Alembic migrations:
+6**Ensure PostgreSQL is running. Run the following command to apply Alembic migrations**:
     ```bash
     poetry run alembic upgrade head
+    ```
+
+7**Run the application**:
+    ```bash
+    poetry run uvicorn main:app --reload
     ```
 
 ## Using the API

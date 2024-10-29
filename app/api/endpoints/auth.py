@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.db import get_db_session
 from app.api.db.models import User
+from app.api.db.settings_db import auth_settings
 from app.api.schemas import Token, TokenData
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
@@ -19,7 +20,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")
 app = FastAPI()
 
 
-SECRET_KEY = "d759d4f8dd25fe2c50453e71e5e4ad1c4304973bd194667214aba37645816181"
+SECRET_KEY = auth_settings.key
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
