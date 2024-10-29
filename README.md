@@ -116,8 +116,7 @@ If the credentials are correct, you will receive a JSON response containing the 
 
 ### Authentication (Auth)
 
-- **POST `/auth/login`**: User authentication and JWT token issuance.
-- **GET `/auth/users/me`**: Retrieve information about the current user.
+- **POST `/api/auth/login`**: User authentication and JWT token issuance.
 
 ### User Management
 - **POST `/api/users/create_user`**: Register a new user. Requires username, password, and role.
