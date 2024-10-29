@@ -7,6 +7,7 @@
 - [Description](#description)
 - [Requirements](#requirements)
 - [Installation and Setup](#installation-and-setup)
+- [Database Migration](#database-migration)
 - [Using the API](#using-the-api)
 - [Registration and Authentication](#registration-and-authentication)
 - [Endpoints](#endpoints)
@@ -31,7 +32,7 @@ The `Todo_app` project is an API for task management (todo) with user authentica
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/username/Todo_app.git
+    git clone https://github.com/sarafantofun/Todo_app.git
     cd Todo_app
     ```
 
@@ -56,7 +57,15 @@ The `Todo_app` project is an API for task management (todo) with user authentica
 
 5. **Run the application**:
     ```bash
-    poetry run uvicorn app.main:app --reload
+    poetry run uvicorn main:app --reload
+    ```
+
+## Database Migration
+
+1. Ensure PostgreSQL is running.
+2. Run the following command to apply Alembic migrations:
+    ```bash
+    poetry run alembic upgrade head
     ```
 
 ## Using the API
@@ -65,31 +74,43 @@ Once started, the application will be available at `http://127.0.0.1:8000`. You 
 
 ## Registration and Authentication
 
+### Register a User
+
+To create a new user, send a `POST` request to `/api/users/create_user` with the following JSON structure:
+
+```json
+{
+  "username": "your_username",
+  "password": "your_password",
+  "role": "admin"  // or "user" or "guest"
+}
+```
+
+## Get Access Token
+
 To use the API, you must first obtain a JWT token for authentication.
 
-1. **Authenticate and obtain a JWT token**:
-   - Send a `POST` request to `/auth/login` with a JSON body containing your `username` and `password`.
-   - Example request body:
-     ```json
-     {
-       "username": "your_username",
-       "password": "your_password"
-     }
-     ```
-   - If the credentials are correct, you will receive a JSON response containing the JWT token:
-     ```json
-     {
-       "access_token": "your_jwt_token",
-       "token_type": "bearer"
-     }
-     ```
+### Authenticate and obtain a JWT Token
 
-2. **Use the token to authenticate requests**:
-   - Include the token in the `Authorization` header of requests that require authentication.
-   - Example header:
-     ```
-     Authorization: Bearer your_jwt_token
-     ```
+Send a `POST` request to `/api/auth/login` with a JSON body containing your username and password.
+
+**Example request body:**
+
+```json
+{
+  "username": "your_username",
+  "password": "your_password"
+}
+```
+
+If the credentials are correct, you will receive a JSON response containing the JWT token:
+
+```json
+{
+  "access_token": "your_jwt_token",
+  "token_type": "bearer"
+}
+```
 
 ## Endpoints
 
@@ -98,12 +119,15 @@ To use the API, you must first obtain a JWT token for authentication.
 - **POST `/auth/login`**: User authentication and JWT token issuance.
 - **GET `/auth/users/me`**: Retrieve information about the current user.
 
+### User Management
+- **POST `/api/users/create_user`**: Register a new user. Requires username, password, and role.
+
 ### Task Management (Todo)
 
-- **POST `/todo`**: Create a new task.
-- **GET `/todo/{todo_id}`**: Retrieve a task by ID.
-- **PUT `/todo/{todo_id}`**: Update a task.
-- **DELETE `/todo/{todo_id}`**: Delete a task.
+- **POST `/api/todo`**: Create a new task.
+- **GET `/api/todo/{todo_id}`**: Retrieve a task by ID.
+- **PUT `/api/todo/{todo_id}`**: Update a task.
+- **DELETE `/api/todo/{todo_id}`**: Delete a task.
 
 ## Project Structure
 
@@ -119,9 +143,15 @@ To use the API, you must first obtain a JWT token for authentication.
 Make sure to create a `.env` file in the root directory with the following environment variables to connect to the PostgreSQL database:
 
 ```dotenv
-POSTGRES_DB=db
-POSTGRES_USER=postgres_user
-POSTGRES_PASSWORD=postgres_password
-POSTGRES_HOST=127.0.0.1
-POSTGRES_PORT=5432
+    POSTGRES_DB=db
+    POSTGRES_USER=postgres_user
+    POSTGRES_PASSWORD=postgres_password
+    POSTGRES_HOST=127.0.0.1
+    POSTGRES_PORT=5432
 ```
+
+## Author
+
+This project, **Todo_app**, was developed by **Tanya Sarafanova** as part of a learning exercise to practice building RESTful APIs with **FastAPI** and **SQLAlchemy**, as well as implementing **JWT-based authentication**. The project is designed to help developers understand and implement modern API development practices.
+
+Feedback and suggestions are always welcome!
